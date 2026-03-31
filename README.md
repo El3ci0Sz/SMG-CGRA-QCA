@@ -33,8 +33,8 @@ A ferramenta possui 4 motores distintos de geração, ajustados para diferentes 
 
 **1. Clone o repositório:**
 ```
-git clone https://github.com/El3ci0Sz/SMG_CGRA-QCA.git
-cd SMG_CGRA-QCA
+git clone https://github.com/El3ci0Sz/SMG-CGRA-QCA.git
+cd SMG-CGRA-QCA
 ```
 **2. Crie um ambiente virtual:**
 ```
