@@ -1,0 +1,20 @@
+1. Geração Padrão (Clock USE)
+Gera 10 grafos em um grid 15x15, exigindo 20 portas lógicas. 
+
+python scripts/runner.py single --tec qca --backwards --k-graphs 10 --arch-size 15 15 --num-gates 20 --visualize --output-dir datasets/results_use 
+
+2. Geração com Clock 2DDWAVE  
+Gera 10 grafos usando o esquema de clock direcional (T). 
+
+python scripts/runner.py single --tec qca --qca-arch T --backwards --k-graphs 10 --arch-size 15 15 --num-gates 20 --visualize --output-dir datasets/results_2ddwave 
+
+Gerando Datasets para CGRA
+
+Gramática Sistemática
+python scripts/runner.py --tec cgra --gen-mode grammar --strategy systematic --difficulty 5 --k-graphs 100 --arch-size 5 5 --output-dir datasets/cgra_sys
+
+Gramática Adaptativa
+python scripts/runner.py --tec cgra --gen-mode grammar --strategy random --difficulty-range 1 10 --k-graphs 100 --arch-size 5 5 --output-dir datasets/cgra_adaptativo
+
+Força Bruta Aleatória
+python scripts/runner.py --tec cgra --gen-mode random --alpha 0.35 --k-graphs 100 --arch-size 8 8 --output-dir datasets/cgra_brute
