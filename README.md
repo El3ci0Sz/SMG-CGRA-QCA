@@ -48,6 +48,42 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+## 📋 Command Line Interface (CLI) Arguments
+
+The framework behavior is highly customizable through CLI arguments. The following table details the primary parameters used for generating benchmarks and datasets.
+
+### 🏛️ Architecture Configurations
+
+| Argument | Description | Example / Valid Values |
+| :--- | :--- | :--- |
+| `--arch-size` | Defines the dimensions of the CGRA grid (Rows x Columns). | `4 4`, `8 8` |
+| `--bits` | 4-bit string that defines the interconnection topology. | `1000` (Mesh), `1001` (Mesh + Toroidal), `1010` (Mesh + One-Hop), `1111` (All) |
+| `--ii` | Defines a fixed Initiation Interval. If omitted, the II is calculated dynamically based on the used resources. | `1`, `2`, `3` |
+| `--qca-arch` | QCA clocking architecture type. | `U`, `R`, `T` |
+
+### 🧩 Graph Generation Configurations
+
+| Argument | Description | Example / Valid Values |
+| :--- | :--- | :--- |
+| `--gen-mode` | Operation mode for the generator. | `grammar` (procedural generation), `random` |
+| `--graph-range` | Target size range (minimum and maximum number of nodes) for the generated DFGs. | `3 70`, `3 16` |
+| `--difficulty` | The complexity level of the grammatical recipe. It can also accept a special flag to switch from systematic to smart random strategy. | `1` to `20` |
+| `--k-graphs` | The number of graphs to be generated per task. | `100`, `10000` |
+| `--strategy` | Defines the difficulty mapping strategy. | `systematic`, `random` |
+| `--difficulty-range` | Defines the range of recipes used when the strategy is set to random. | `1 10` |
+| `--alpha` | Probability factor used to generate random edges in the brute-force method. | `0.35` |
+| `--num-gates` | Number of logic gates to target in the Backwards QCA generation. | `20` |
+| `--backwards` | Flag to enable the Backwards generation logic specific to QCA. | (Flag) |
+
+### ⚙️ Execution Configurations
+
+| Argument | Description | Example / Valid Values |
+| :--- | :--- | :--- |
+| `--output-dir` | Root directory where the output results (`.dot`, `.json`, `.png`) will be saved. | `datasets/cgra_grammar` |
+| `--no-images` | Disables the generation of PNG images of the graphs to save disk space and CPU time. | (Flag) |
+| `--visualize` | Enables the generation of visual grids and layout outputs for the generated architectures. | (Flag) |
+| `--workers` | Number of parallel processes. If not defined, it uses all available cores. | `4`, `8` |
+
 🚀 **How to Use (CLI)**
 
 The framework is fully operated through the command line. Below are usage examples for the 4 generation strategies.
