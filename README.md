@@ -11,7 +11,7 @@ A procedural framework developed in Python for the large-scale generation of syn
 
 The tool provides 4 distinct generation engines, tailored for different scenarios and technologies:
 
-1. **CGRA - Systematic Grammar:** Procedural generation based on the topology of the physical interconnection network, applying formal rules (expansion, convergence, reconvergence) to achieve a fixed level of structural complexity.
+1. **CGRA - Systematic Grammar:** Procedural generation based on the topology of the physical interconnection network, applying formal rules (tree, convergence, reconvergence) to achieve a fixed level of structural complexity.
 2. **CGRA - Adaptive Grammar (Random):** Dynamically samples difficulty levels, adapting probability weights according to the generation success rate in order to maximize topological diversity.
 3. **CGRA - Random Brute Force:** Ignores the restrictive grammar and generates purely random connections (controlled by an $\alpha$ factor), ideal for creating comparative *baselines* and testing the limits of the validation processor.
 4. **QCA - Backwards Generation:** Dedicated strategy for QCA. Solves the *USE* and *2DDWave* clocking schemes while mitigating central congestion by routing wires from physical outputs to inputs, using a quadrant-density-based cost function.
