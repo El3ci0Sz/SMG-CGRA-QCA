@@ -1,72 +1,81 @@
-# 🧬 Synthetic Mapping Generator para CGRA e QCA
+# 🧬 Synthetic Mapping Generator for CGRA and QCA
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![NetworkX](https://img.shields.io/badge/NetworkX-Graph_Processing-green.svg)](https://networkx.org/)
 
-Um framework procedural de desenvolvido em Python para a geração em larga escala de mapeamentos sintéticos de circuitos. O foco desta ferramenta é criar datasets topologicamente válidos para **Arquiteturas Reconfiguráveis de Granularidade Grossa (CGRA)** e **Autômatos Celulares de Pontos Quânticos (QCA)**, visando o treinamento de modelos de Inteligência Artificial (como Graph Neural Networks) aplicados ao problema de Posicionamento e Roteamento (Electronic Design Automation - EDA).
+A procedural framework developed in Python for the large-scale generation of synthetic circuit mappings. The focus of this tool is to create topologically valid datasets for **Coarse-Grained Reconfigurable Architectures (CGRA)** and **Quantum-dot Cellular Automata (QCA)**, targeting the training of Artificial Intelligence models (such as Graph Neural Networks) applied to the Placement and Routing problem (Electronic Design Automation - EDA).
 
 ---
 
-### ✨ Principais Funcionalidades (Estratégias de Geração)
+### ✨ Main Features (Generation Strategies)
 
-A ferramenta possui 4 motores distintos de geração, ajustados para diferentes cenários e tecnologias:
+The tool provides 4 distinct generation engines, tailored for different scenarios and technologies:
 
-1. **CGRA - Gramática Sistemática:** Geração processual baseada na topologia da rede de interconexão física, aplicando regras formais (expansão, convergência, reconvergência) para atingir um nível de dificuldade estrutural fixo.
-2. **CGRA - Gramática Adaptativa (Random):** Sorteia dinamicamente os níveis de dificuldade, adaptando os pesos de probabilidade com base na taxa de sucesso da geração para maximizar a diversidade topológica.
-3. **CGRA - Força Bruta Aleatória:** Ignora a gramática restritiva e gera conexões puramente aleatórias (controladas por um fator $\alpha$), ideal para criar *baselines* comparativos e testar os limites do processador de validação.
-4. **QCA - Geração Reversa (Backwards):** Estratégia dedicada para QCA. Resolve o esquema de clock *USE* e *2DDWave* mitigando o congestionamento central ao rotear os fios das saídas físicas para as entradas, utilizando uma função de custo baseada na densidade de quadrantes.
-5. **Validação Integrada:** Checagem rigorosa e automatizada de grafos acíclicos direcionados (DAGs), conectividade, balanço topológico e conformidade com as regras de *clock*.
-6. **Visualização:** Geração automatizada de matrizes ASCII no terminal e imagens PNG de alta resolução do layout físico utilizando Graphviz (Neato).
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-* **Linguagem:** Python (3.8+)
-* **Processamento de Grafos:** `NetworkX` (Manipulação e validação estrutural).
-* **Visualização:** `Graphviz` (Motor de renderização física).
-* **CLI:** `argparse` para uma interface de linha de comando modular e intuitiva.
+1. **CGRA - Systematic Grammar:** Procedural generation based on the topology of the physical interconnection network, applying formal rules (expansion, convergence, reconvergence) to achieve a fixed level of structural complexity.
+2. **CGRA - Adaptive Grammar (Random):** Dynamically samples difficulty levels, adapting probability weights according to the generation success rate in order to maximize topological diversity.
+3. **CGRA - Random Brute Force:** Ignores the restrictive grammar and generates purely random connections (controlled by an $\alpha$ factor), ideal for creating comparative *baselines* and testing the limits of the validation processor.
+4. **QCA - Backwards Generation:** Dedicated strategy for QCA. Solves the *USE* and *2DDWave* clocking schemes while mitigating central congestion by routing wires from physical outputs to inputs, using a quadrant-density-based cost function.
+5. **Integrated Validation:** Rigorous and automated verification of directed acyclic graphs (DAGs), connectivity, topological balance, and compliance with clocking rules.
+6. **Visualization:** Automated generation of ASCII matrices in the terminal and high-resolution PNG images of the physical layout using Graphviz (Neato).
 
 ---
 
-## ⚙️ Instalação e Configuração
+## 🛠️ Technologies Used
 
-**1. Clone o repositório:**
-```
+* **Language:** Python (3.8+)
+* **Graph Processing:** `NetworkX` (Structural manipulation and validation).
+* **Visualization:** `Graphviz` (Physical rendering engine).
+* **CLI:** `argparse` for a modular and intuitive command-line interface.
+
+---
+
+## ⚙️ Installation and Setup
+
+**1. Clone the repository:**
+```bash
 git clone https://github.com/El3ci0Sz/SMG-CGRA-QCA.git
 cd SMG-CGRA-QCA
 ```
-**2. Crie um ambiente virtual:**
-```
+
+**2. Create a virtual environment:**
+```bash
 python3 -m venv venv
-source venv/bin/activate  # No Windows use: venv\Scripts\activate
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 ```
 
-**3. Instale as dependências:**
-```
+**3. Install the dependencies:**
+```bash
 pip install -r requirements.txt
 ```
 
-🚀 **Como Utilizar (CLI)**
+🚀 **How to Use (CLI)**
 
-O framework é operado inteiramente via linha de comando . Abaixo estão os exemplos de uso para as 4 estratégias de geração.
+The framework is fully operated through the command line. Below are usage examples for the 4 generation strategies.
 
-**Gerando Datasets para CGRA** 
+**Generating Datasets for CGRA**
 
-**1: Gramática Sistemática.** 
+**1: Systematic Grammar.**
 
+```bash
 python scripts/runner.py --tec cgra --gen-mode grammar --strategy systematic --difficulty 5 --k-graphs 100 --arch-size 5 5 --output-dir datasets/cgra_grammar_systematic
+```
 
-**2: Gramática Adaptativa.** 
+**2: Adaptive Grammar.**
 
+```bash
 python scripts/runner.py --tec cgra --gen-mode grammar --strategy random --difficulty-range 1 10 --k-graphs 100 --arch-size 5 5 --output-dir datasets/cgra_grammar_random
+```
 
-**3: Força Bruta Aleatória.** 
+**3: Random Brute Force.**
 
+```bash
 python scripts/runner.py --tec cgra --gen-mode random --alpha 0.35 --k-graphs 100 --arch-size 8 8 --output-dir datasets/cgra_random
+```
 
-**Gerando Datasets para QCA** 
+**Generating Datasets for QCA**
 
-**4: QCA Backwards (Gerador Reverso).** 
+**4: QCA Backwards (Reverse Generator).**
 
+```bash
 python scripts/runner.py --tec qca --qca-arch T --backwards --num-gates 20 --k-graphs 10 --arch-size 15 15 --visualize --output-dir datasets/qca_reverso
+```
