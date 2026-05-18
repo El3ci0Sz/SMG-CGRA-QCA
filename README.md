@@ -13,7 +13,7 @@ The tool provides 4 distinct generation engines, tailored for different scenario
 
 1. **CGRA - Systematic Grammar:** Procedural generation based on the topology of the physical interconnection network, applying formal rules (tree, convergence, reconvergence) to achieve a fixed level of structural complexity.
 2. **CGRA - Adaptive Grammar (Random):** Dynamically samples difficulty levels, adapting probability weights according to the generation success rate in order to maximize topological diversity.
-3. **CGRA - Random Brute Force:** Ignores the restrictive grammar and generates purely random connections (controlled by an $\alpha$ factor), ideal for creating comparative *baselines* and testing the limits of the validation processor.
+3. **CGRA - Random Brute Force:** Ignores the restrictive grammar and generates purely random connections (controlled by an $\alpha$ factor).
 4. **QCA - Backwards Generation:** Dedicated strategy for QCA. Solves the *USE* and *2DDWave* clocking schemes while mitigating central congestion by routing wires from physical outputs to inputs, using a quadrant-density-based cost function.
 5. **Integrated Validation:** Rigorous and automated verification of directed acyclic graphs (DAGs), connectivity, topological balance, and compliance with clocking rules.
 6. **Visualization:** Automated generation of ASCII matrices in the terminal and high-resolution PNG images of the physical layout using Graphviz (Neato).
